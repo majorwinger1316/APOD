@@ -16,43 +16,37 @@ struct HomeView: View {
 
         var body: some View {
             NavigationStack {
-                VStack {
-
-                    // 🔘 Change Date Button
-                    Button {
-                        tempSelectedDate = selectedDate
-                        showDateSheet = true
-                    } label: {
-                        HStack {
-                            Image(systemName: "calendar")
-                            Text("Change Date")
+                content
+                    .navigationTitle("APOD")
+                    .navigationBarTitleDisplayMode(.large)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button {
+                                tempSelectedDate = selectedDate
+                                showDateSheet = true
+                            } label: {
+                                Image(systemName: "calendar")
+                            }
+                            .accessibilityLabel("Select Date")
                         }
-                        .font(.headline)
-                        .padding()
                     }
-
-                    content
-                }
-                .navigationTitle("NASA APOD")
-                .onAppear {
-                    // ✅ Today's APOD on launch
-                    viewModel.fetchApod(for: selectedDate)
-                }
-                .sheet(isPresented: $showDateSheet) {
-                    DatePickerSheet(
-                        selectedDate: $tempSelectedDate,
-                        onDone: {
-                            selectedDate = tempSelectedDate
-                            viewModel.fetchApod(for: selectedDate)
-                            showDateSheet = false
-                        },
-                        onCancel: {
-                            showDateSheet = false
-                        }
-                    )
-                    .presentationDetents([.medium])
-                    .presentationDragIndicator(.visible)
-                }
+                    .onAppear {
+                        viewModel.fetchApod(for: selectedDate)
+                    }
+                    .sheet(isPresented: $showDateSheet) {
+                        DatePickerSheet(
+                            selectedDate: $tempSelectedDate,
+                            onDone: {
+                                selectedDate = tempSelectedDate
+                                viewModel.fetchApod(for: selectedDate)
+                                showDateSheet = false
+                            },
+                            onCancel: {
+                                showDateSheet = false
+                            }
+                        )
+                        .presentationDetents([.medium])
+                    }
             }
         }
 }
@@ -60,6 +54,7 @@ struct HomeView: View {
 struct ApodCardView: View {
 
     let apod: ApodResponseData
+        @State private var showFullScreen = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -130,6 +125,32 @@ struct ProgressiveImageView: View {
     }
 }
 
+struct ExplanationView: View {
+
+    let fullText: String
+    let summaryText: String
+
+    @State private var expanded = false
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+
+            Text(expanded ? fullText : summaryText)
+                .font(.body)
+                .foregroundColor(.primary)
+                .animation(.easeInOut, value: expanded)
+
+            Button {
+                expanded.toggle()
+            } label: {
+                Text(expanded ? "Show Less" : "Read More")
+                    .font(.caption)
+                    .fontWeight(.semibold)
+            }
+        }
+    }
+}
+
 struct ApodDatePicker: View {
 
     @Binding var selectedDate: Date
@@ -191,6 +212,55 @@ struct DatePickerSheet: View {
             .datePickerStyle(.wheel)
             .labelsHidden()
         }
+    }
+}
+
+struct ZoomableImageView: View {
+
+    let imageURL: URL
+    @Environment(\.dismiss) private var dismiss
+
+    @State private var scale: CGFloat = 1
+    @State private var lastScale: CGFloat = 1
+
+    var body: some View {
+        ZStack {
+            Color.black.ignoresSafeArea()
+
+            AsyncImage(url: imageURL) { image in
+                image
+                    .resizable()
+                    .scaledToFit()
+                    .scaleEffect(scale)
+                    .gesture(
+                        MagnificationGesture()
+                            .onChanged { value in
+                                scale = lastScale * value
+                            }
+                            .onEnded { _ in
+                                lastScale = scale
+                            }
+                    )
+                    .onTapGesture(count: 2) {
+                        withAnimation {
+                            scale = scale > 1 ? 1 : 2.5
+                            lastScale = scale
+                        }
+                    }
+            } placeholder: {
+                ProgressView()
+            }
+        }
+        .onTapGesture {
+            dismiss()
+        }
+    }
+}
+
+extension String {
+    func summarized() -> String {
+        let sentences = self.split(separator: ".")
+        return sentences.prefix(2).joined(separator: ". ") + "."
     }
 }
 

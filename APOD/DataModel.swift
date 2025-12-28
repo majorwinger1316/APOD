@@ -7,11 +7,21 @@
 
 import Foundation
 
-struct ApodData: Codable {
-    let date: String
-    let explanation: String
-    let hdurl: String
-    let media_type: String
-    let title: String
-    let url: String
+struct ApodResponseData: Codable, Identifiable {
+        let id = UUID()
+        let date: String
+        let explanation: String
+        let hdurl: String?
+        let mediaType: String
+        let title: String
+        let url: String
+
+        enum CodingKeys: String, CodingKey {
+                case date
+                case explanation
+                case hdurl
+                case mediaType = "media_type"
+                case title
+                case url
+        }
 }

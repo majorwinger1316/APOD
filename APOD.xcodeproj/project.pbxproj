@@ -263,8 +263,6 @@
 		};
 		AC1E358F2F01A361009A0056 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReferenceAnchor = AC1E35852F01A360009A0056 /* APOD */;
-			baseConfigurationReferenceRelativePath = Secrets.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -339,7 +337,7 @@
 				AC1E358D2F01A361009A0056 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		AC1E358E2F01A361009A0056 /* Build configuration list for PBXNativeTarget "APOD" */ = {
 			isa = XCConfigurationList;
@@ -348,7 +346,7 @@
 				AC1E35902F01A361009A0056 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

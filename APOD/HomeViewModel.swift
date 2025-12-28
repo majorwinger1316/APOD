@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-class HomeViewModel: ObservableObject {
-    async func fetchData() {
-        
-    }
-}
+//class HomeViewModel: ObservableObject {
+//    async func fetchData() {
+//        
+//    }
+//}

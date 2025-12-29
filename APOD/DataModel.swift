@@ -25,3 +25,8 @@ struct ApodResponseData: Codable, Identifiable {
                 case url
         }
 }
+
+struct AlertMessage: Identifiable {
+    let id = UUID()
+    let message: String
+}

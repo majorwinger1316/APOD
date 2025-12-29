@@ -1,21 +1,17 @@
-🌌 APOD – Astronomy Picture of the Day (iOS)
+<h1 align="center"><strong>🌌 APOD – Astronomy Picture of the Day (iOS)</strong></h1>
 
 An iOS application built using SwiftUI that displays NASA’s Astronomy Picture of the Day (APOD), with a strong focus on performance, clean architecture, and native iOS UX.
 
-This project was developed as part of a time-bound company technical assignment.
+<br/>
+## 📸 Screenshots
+<div align="center">
+  <img width="1359" src="https://github.com/user-attachments/assets/fb886754-9c9f-4fc3-80fe-b96e48c77c6d" />
+  <img width="1359" src="https://github.com/user-attachments/assets/67a09c22-1fd5-48de-8cb1-238763833cc6" />
+  <img width="1359" src="https://github.com/user-attachments/assets/90f7afdd-cc99-4632-9feb-5e239a74256d" />
+</div>
 
 <br/>
-📸 Screenshots
-
-(Add screenshots / screen recordings here)
-
-📷 Home Screen
-📷 Date Picker
-📷 Fullscreen Image Viewer
-📷 Zoom + Share / Save
-
-<br/>
-📱 Features
+## 📱 Features
 Core Functionality
 
 📅 Displays today’s APOD on launch
@@ -39,11 +35,11 @@ Core Functionality
 📖 Expandable explanation text
 
 <br/>
-🎨 UI / UX Design
+## 🎨 UI / UX Design
 
 Built entirely with SwiftUI
 
-Glass-like UI using ultraThinMaterial
+Apple Glass UI using ultraThinMaterial
 
 Immersive fullscreen viewing experience
 
@@ -54,7 +50,7 @@ Follows Apple Human Interface Guidelines
 Minimal and distraction-free design
 
 <br/>
-🧠 Architecture
+## 🧠 Architecture
 
 MVVM (Model–View–ViewModel)
 
@@ -77,7 +73,7 @@ UI
 Presentation logic
 
 <br/>
-🌐 Networking
+## 🌐 Networking
 
 Uses NASA APOD API
 
@@ -94,7 +90,7 @@ Invalid responses
 Unsupported media types
 
 <br/>
-🚀 Performance Optimizations
+## 🚀 Performance Optimizations
 
 Progressive image loading
 
@@ -107,7 +103,7 @@ ViewModel remains agnostic of image resolution
 Smooth perceived performance even on slow networks
 
 <br/>
-🔐 Security & Configuration
+## 🔐 Security & Configuration
 
 Sensitive configuration is not committed to source control.
 
@@ -120,7 +116,7 @@ Secrets.xcconfig is ignored by Git
 A template file is provided for setup
 
 <br/>
-⚙️ Setup Instructions
+## ⚙️ Setup Instructions
 1️⃣ Clone the repository
 git clone <repository-url>
 
@@ -149,7 +145,7 @@ Select simulator or real device
 Build & run
 
 <br/>
-🧪 Permissions Required
+## 🧪 Permissions Required
 
 The app requests:
 
@@ -157,12 +153,12 @@ Photo Library (Add Only) – for saving images
 
 Ensure the following keys exist in Info.plist:
 
-NSPhotoLibraryAddUsageDescription
+Privacy - Photo Library Additions Usage Description
 
-NSPhotoLibraryUsageDescription
+Privacy - Photo Library Usage Description
 
 <br/>
-🧭 Gesture Guide
+## 🧭 Gesture Guide
 Gesture	Action
 Swipe Left	Go to next day
 Swipe Right	Go to previous day
@@ -183,22 +179,7 @@ Video APOD playback was intentionally skipped
 These were conscious decisions to prioritize clean execution.
 
 <br/>
-🔮 Possible Improvements
-
-Persistent favourites (Core Data)
-
-Offline caching
-
-APOD video support
-
-Accessibility improvements
-
-Background prefetching
-
-Unit tests
-
-<br/>
-🧑‍💻 Tech Stack
+## 🧑‍💻 Tech Stack
 
 Swift
 
@@ -213,11 +194,11 @@ URLSession
 Photos Framework
 
 <br/>
-📸 Credits
+## 📸 Credits
 
 Images and data provided by NASA APOD API
 
 <br/>
-✅ Final Note
+## ✅ Final Note
 
 This project focuses on engineering judgment, code quality, and user experience, rather than maximizing feature count.

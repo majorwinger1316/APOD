@@ -5,9 +5,9 @@ An iOS application built using SwiftUI that displays NASA’s Astronomy Picture 
 <br/>
 ## 📸 Screenshots
 <div align="center">
-  <img width="1359" src="https://github.com/user-attachments/assets/fb886754-9c9f-4fc3-80fe-b96e48c77c6d" />
-  <img width="1359" src="https://github.com/user-attachments/assets/67a09c22-1fd5-48de-8cb1-238763833cc6" />
-  <img width="1359" src="https://github.com/user-attachments/assets/90f7afdd-cc99-4632-9feb-5e239a74256d" />
+  <img width="250" src="https://github.com/user-attachments/assets/fb886754-9c9f-4fc3-80fe-b96e48c77c6d" />
+  <img width="250" src="https://github.com/user-attachments/assets/67a09c22-1fd5-48de-8cb1-238763833cc6" />
+  <img width="250" src="https://github.com/user-attachments/assets/90f7afdd-cc99-4632-9feb-5e239a74256d" />
 </div>
 
 <br/>

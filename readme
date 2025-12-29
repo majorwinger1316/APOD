@@ -1,0 +1,207 @@
+🌌 APOD – Astronomy Picture of the Day (iOS)
+
+An iOS application built using SwiftUI that displays NASA’s Astronomy Picture of the Day (APOD) with a focus on performance, clean architecture, and native iOS user experience.
+
+This project was developed as part of a company technical assignment with a strict time constraint.
+
+📱 Features
+Core Functionality
+
+📅 View today’s APOD on app launch
+
+🕰 Select APOD for any date using a wheel-style date picker
+
+⬅️➡️ Swipe horizontally to navigate to previous or next days
+
+🖼 Progressive image loading (low-res first, HD later)
+
+🔍 Fullscreen Photos-style image viewer
+
+🤏 Pinch & double-tap to zoom (cannot zoom out smaller than screen)
+
+⬇️ Pull down to dismiss fullscreen image
+
+💾 Save image to Photos
+
+📤 Share image using native iOS share sheet
+
+📖 Read full explanation with expandable text
+
+🎨 UI / UX Design
+
+Built entirely with SwiftUI
+
+Uses glass / material-based UI (ultraThinMaterial)
+
+Dark, immersive fullscreen image viewer
+
+Subtle animations and gesture feedback
+
+Follows Apple Human Interface Guidelines
+
+Minimal, distraction-free design
+
+🧠 Architecture
+
+MVVM (Model–View–ViewModel)
+
+HomeViewModel handles:
+
+API requests
+
+State management
+
+Error handling
+
+Views are kept declarative and lightweight
+
+Clear separation between:
+
+Networking
+
+UI logic
+
+Presentation logic
+
+🌐 Networking
+
+Uses NASA APOD API
+
+Implemented using async/await
+
+Prevents duplicate API calls using date tracking
+
+Graceful handling of:
+
+Network failures
+
+Invalid responses
+
+Unsupported media types
+
+🚀 Performance Optimizations
+
+Progressive image loading
+
+Low-resolution image loads immediately
+
+High-resolution image upgrades silently when available
+
+ViewModel is agnostic of image resolution
+
+Smooth perceived performance even on slow networks
+
+🔐 Security & Configuration
+
+Sensitive configuration is not committed to the repository.
+
+API Key Handling
+
+Uses an .xcconfig file for secrets
+
+Secrets.xcconfig is ignored by Git
+
+A template file is provided for setup
+
+⚙️ Setup Instructions
+1️⃣ Clone the repository
+git clone <repository-url>
+
+2️⃣ Create Secrets file
+
+Copy Secrets.xcconfig.example
+
+Rename it to Secrets.xcconfig
+
+3️⃣ Add your NASA API key
+API_KEY = YOUR_NASA_API_KEY
+
+
+You can get a free API key from: https://api.nasa.gov
+
+4️⃣ Open the project in Xcode
+
+Select an iOS Simulator or real device
+
+Build & run
+
+🧪 Permissions Required
+
+The app requests the following permissions:
+
+Photo Library (Add Only) – to save images to Photos
+
+Make sure the following keys exist in Info.plist:
+
+NSPhotoLibraryAddUsageDescription
+
+NSPhotoLibraryUsageDescription
+
+🧭 Gesture Guide
+Gesture	Action
+Swipe Left	Go to next day
+Swipe Right	Go to previous day
+Pinch	Zoom in
+Double Tap	Toggle zoom
+Pull Down	Dismiss fullscreen image
+🛠 Trade-offs & Decisions
+
+Given the limited time:
+
+Focused on stability and UX over feature count
+
+Did not implement persistent storage for favourites
+
+Did not add video playback for APOD videos
+
+These were conscious decisions to prioritize quality over quantity.
+
+🔮 Possible Improvements
+
+Persistent favourites using Core Data
+
+Offline caching of APOD content
+
+APOD video playback support
+
+Accessibility enhancements
+
+Background prefetching
+
+Unit tests for ViewModel
+
+🧑‍💻 Tech Stack
+
+Swift
+
+SwiftUI
+
+Combine (light usage)
+
+Async/Await
+
+URLSession
+
+Photos Framework
+
+📝 Notes
+
+This project demonstrates:
+
+Strong SwiftUI fundamentals
+
+Modern iOS APIs
+
+Thoughtful UX decisions
+
+Clean and maintainable architecture
+
+Real-world handling of edge cases
+
+📸 Credits
+
+Images & data provided by NASA APOD API
+
+✅ Final Note
+
+This project was intentionally scoped to demonstrate engineering judgment, not just feature implementation.

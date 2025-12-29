@@ -20,14 +20,12 @@ final class ProgressiveImageLoader {
         completion: @escaping (UIImage) -> Void
     ) {
 
-        // 1️⃣ If HD already cached → show immediately
         if let highResURL = highResURL,
            let cachedHD = ImageCache.shared.image(forKey: highResURL.absoluteString) {
             completion(cachedHD)
             return
         }
 
-        // 2️⃣ Load LOW image first
         if let cachedLow = ImageCache.shared.image(forKey: lowResURL.absoluteString) {
             completion(cachedLow)
         } else {
@@ -37,13 +35,12 @@ final class ProgressiveImageLoader {
             }
         }
 
-        // 3️⃣ Download HD in background
         guard let highResURL = highResURL else { return }
 
         downloadImage(from: highResURL) { image in
             ImageCache.shared.set(image, forKey: highResURL.absoluteString)
             DispatchQueue.main.async {
-                completion(image) // 🔥 swap only when ready
+                completion(image)
             }
         }
     }

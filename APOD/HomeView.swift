@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Photos
 
 struct HomeView: View {
         @StateObject private var viewModel = HomeViewModel()
@@ -17,7 +18,9 @@ struct HomeView: View {
         var body: some View {
             NavigationStack {
                 content
-                    .navigationTitle("APOD")
+                            .navigationTitle(
+                                viewModel.apodList.first?.date ?? "APOD"
+                            )
                     .navigationBarTitleDisplayMode(.large)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
@@ -51,48 +54,6 @@ struct HomeView: View {
                     }
             }
         }
-}
-
-struct ZoomableImageView: View {
-
-    let imageURL: URL
-    @Environment(\.dismiss) private var dismiss
-
-    @State private var scale: CGFloat = 1
-    @State private var lastScale: CGFloat = 1
-
-    var body: some View {
-        ZStack {
-            Color.black.ignoresSafeArea()
-
-            AsyncImage(url: imageURL) { image in
-                image
-                    .resizable()
-                    .scaledToFit()
-                    .scaleEffect(scale)
-                    .gesture(
-                        MagnificationGesture()
-                            .onChanged { value in
-                                scale = lastScale * value
-                            }
-                            .onEnded { _ in
-                                lastScale = scale
-                            }
-                    )
-                    .onTapGesture(count: 2) {
-                        withAnimation {
-                            scale = scale > 1 ? 1 : 2.5
-                            lastScale = scale
-                        }
-                    }
-            } placeholder: {
-                ProgressView()
-            }
-        }
-        .onTapGesture {
-            dismiss()
-        }
-    }
 }
 
 extension String {

@@ -40,7 +40,6 @@ struct DatePickerSheet: View {
 
             Divider()
 
-            // Clock-style wheel picker
             DatePicker(
                 "",
                 selection: $selectedDate,

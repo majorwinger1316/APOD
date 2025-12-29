@@ -32,7 +32,6 @@ final class HomeViewModel: ObservableObject {
         return df
     }()
 
-    // MARK: - Public API
     func fetchApod(for date: Date) {
         let dateString = dateFormatter.string(from: date)
         guard dateString != lastFetchedDate else { return }
@@ -41,7 +40,6 @@ final class HomeViewModel: ObservableObject {
         fetchApod(date: dateString)
     }
 
-    // MARK: - Network
     private func fetchApod(date: String) {
         guard let url = buildURL(date: date) else {
             errorMessage = "Invalid URL"
@@ -67,7 +65,6 @@ final class HomeViewModel: ObservableObject {
         }
     }
 
-    // MARK: - URL Builder
     private func buildURL(date: String) -> URL? {
         var components = URLComponents(string: EndPoint.apod)
         components?.queryItems = [

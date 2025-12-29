@@ -8,5 +8,5 @@
 import Foundation
 
 enum EndPoint {
-    static let apod = "https://api.nasa.gov/planetary/apod"
+        static let apod = "https://api.nasa.gov/planetary/apod"
 }

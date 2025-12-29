@@ -67,7 +67,6 @@ struct ZoomableImageView: View {
                 }
             }
 
-            // Header + Actions
             VStack {
                 header
                 Spacer()

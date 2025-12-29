@@ -27,6 +27,6 @@ struct ApodResponseData: Codable, Identifiable {
 }
 
 struct AlertMessage: Identifiable {
-    let id = UUID()
-    let message: String
+        let id = UUID()
+        let message: String
 }

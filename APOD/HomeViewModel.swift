@@ -15,6 +15,8 @@ final class HomeViewModel: ObservableObject {
     @Published var apodList: [ApodResponseData] = []
     @Published var isLoading = false
     @Published var errorMessage: String?
+        @Published var showNotPublishedMessage = false
+
 
     private var lastFetchedDate: String?
 
@@ -40,31 +42,55 @@ final class HomeViewModel: ObservableObject {
         fetchApod(date: dateString)
     }
 
-    private func fetchApod(date: String) {
-        guard let url = buildURL(date: date) else {
-            errorMessage = "Invalid URL"
-            return
-        }
-
-        isLoading = true
-        errorMessage = nil
-
-        Task {
-            do {
-                let (data, _) = try await URLSession.shared.data(from: url)
-                let decoded = try JSONDecoder().decode(ApodResponseData.self, from: data)
-
-                withAnimation(.easeInOut(duration: 0.35)) {
-                    self.apodList = [decoded]
-                }
-            } catch {
-                self.errorMessage = error.localizedDescription
+        private func fetchApod(date: String) {
+            guard let url = buildURL(date: date) else {
+                errorMessage = "Invalid URL"
+                return
             }
 
-            self.isLoading = false
-        }
-    }
+            isLoading = true
+            errorMessage = nil
+            showNotPublishedMessage = false
 
+            Task {
+                do {
+                    let (data, response) = try await URLSession.shared.data(from: url)
+
+                    guard let httpResponse = response as? HTTPURLResponse else {
+                        errorMessage = "Invalid server response"
+                        isLoading = false
+                        return
+                    }
+
+                    if httpResponse.statusCode == 404, isToday(date) {
+                        apodList = []
+                        showNotPublishedMessage = true
+                        isLoading = false
+                        return
+                    }
+
+                    let decoded = try JSONDecoder().decode(ApodResponseData.self, from: data)
+
+                    if decoded.date != date, isToday(date) {
+                        apodList = []
+                        showNotPublishedMessage = true
+                        isLoading = false
+                        return
+                    }
+
+                    withAnimation(.easeInOut(duration: 0.35)) {
+                        self.apodList = [decoded]
+                    }
+
+                } catch {
+                    errorMessage = error.localizedDescription
+                }
+
+                isLoading = false
+            }
+        }
+
+        
     private func buildURL(date: String) -> URL? {
         var components = URLComponents(string: EndPoint.apod)
         components?.queryItems = [
@@ -73,6 +99,21 @@ final class HomeViewModel: ObservableObject {
         ]
         return components?.url
     }
+        
+        private func isToday(_ dateString: String) -> Bool {
+            let formatter = DateFormatter()
+            formatter.calendar = Calendar(identifier: .gregorian)
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+            formatter.dateFormat = "yyyy-MM-dd"
+
+            guard let date = formatter.date(from: dateString) else { return false }
+            return Calendar.current.isDateInToday(date)
+        }
+        
+        func retry(selectedDate: Date) {
+            lastFetchedDate = nil
+            fetchApod(for: selectedDate)
+        }
 }
 
 private extension HomeViewModel {
